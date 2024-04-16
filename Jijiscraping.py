@@ -15,7 +15,7 @@ options = Options()
 
 options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36")
 
-service = Service(executable_path="C:\\chromedriver.exe")
+service = Service(executable_path="drivers/chromedriver")
 options.add_argument("--headless=new")
 driver = webdriver.Chrome(service=service, options=options)
 driver.get("https://jiji.ng/real-estate")
