@@ -1,4 +1,5 @@
 from selenium import webdriver
+from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
@@ -15,10 +16,11 @@ options = Options()
 
 options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36")
 
-service = Service(executable_path="drivers/chromedriver")
+# service = Service(executable_path="drivers/chromedriver")
 options.add_argument("--headless=new")
-driver = webdriver.Chrome(service=service, options=options)
-driver.get("https://jiji.ng/real-estate")
+chromedriver_path = ChromeDriverManager().install()
+
+driver = webdriver.Chrome(chromedriver_path, options=options)
 base_url = "https://jiji.ng" 
 time.sleep(5)
 # itemz = []
