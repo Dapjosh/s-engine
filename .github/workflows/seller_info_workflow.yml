@@ -16,6 +16,12 @@ jobs:
         with:
           python-version: '3.8'
 
+      - name: Install Chrome browser
+        run: sudo apt-get update && sudo apt-get install -y google-chrome-stable
+      
+      - name: Copy ChromeDriver
+        run: cp drivers/chromedriver /usr/local/bin    
+
       - name: Install dependencies
         run: |
           pip install selenium
