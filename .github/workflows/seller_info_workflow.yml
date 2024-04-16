@@ -24,7 +24,11 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install selenium
+          pip install selenium webdriver-manager
+
+      - name: Download ChromeDriver
+        run: |
+          python -m webdriver_manager.chrome install   
 
       - name: Run script
         run: python Jijiscraping.py
