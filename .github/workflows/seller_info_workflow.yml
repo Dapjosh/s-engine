@@ -27,5 +27,4 @@ jobs:
       - name: Run Cookies for login
         run: python cookies.py
 
-      - name: Run Script
-        run: python Jijiscraping.py
+     
