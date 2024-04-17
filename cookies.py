@@ -6,10 +6,12 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium_requests import Request, Session
 import time
 import json
 
 options = webdriver.ChromeOptions()
+session = Session()
 chromedriver_path = ChromeDriverManager().install()
 service = Service(executable_path=chromedriver_path)
 options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36")
@@ -17,7 +19,7 @@ options.add_argument("--headless=new")
 options.add_argument("--no-sandbox")
 
 # Initialize the Chrome driver with options
-driver = webdriver.Chrome(service=service, options=options)
+driver = session.create_driver(webdriver.Chrome,service=service, options=options)
 
 
 # Navigate to the Jiji laptop website
