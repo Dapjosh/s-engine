@@ -10,13 +10,19 @@ from selenium_requests import Request, Session
 import time
 import json
 
-options = webdriver.ChromeOptions()
+# options = webdriver.ChromeOptions()
 session = Session()
 chromedriver_path = ChromeDriverManager().install()
 service = Service(executable_path=chromedriver_path)
-options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36")
-options.add_argument("--headless=new")
-options.add_argument("--no-sandbox")
+# options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36")
+# options.add_argument("--headless=new")
+# options.add_argument("--no-sandbox")
+
+options = {
+    "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36",
+    "headless": True,
+    "no-sandbox": True,
+}
 
 # Initialize the Chrome driver with options
 driver = session.create_driver(webdriver.Chrome,service=service, options=options)
