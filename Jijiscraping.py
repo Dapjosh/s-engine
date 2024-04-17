@@ -75,7 +75,7 @@ time.sleep(10)
 with open('cookies.json', 'r') as file:
     cookies = json.load(file)
     
-driver.get("https://jiji.ng/real-estate")
+driver.get("https://jiji.ng")
   
 for cookie in cookies:
     if 'expiry' in cookie:
