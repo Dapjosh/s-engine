@@ -1,7 +1,7 @@
 from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
 # from selenium.webdriver.chrome.options import Options
-# from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
@@ -16,11 +16,12 @@ options = webdriver.ChromeOptions()
 
 options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36")
 options.add_argument("--headless=new")
+options.add_argument("--no-sandbox")
 
-chromedriver_path = ChromeDriverManager().install()
+chromedriver_autoinstaller.install()
 
 # Initialize the Chrome driver with options
-driver = webdriver.Chrome(chromedriver_path, options=options)
+driver = webdriver.Chrome(options=options)
 
 base_url = "https://jiji.ng" 
 time.sleep(5)
