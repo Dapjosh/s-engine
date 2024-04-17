@@ -7,14 +7,14 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException, NoSuchElementException
-from selenium_requests import Session
+import requests
 import json
 import time
 import csv
 import os
 
 # options = webdriver.ChromeOptions()
-session = Session()
+session = requests.session()
 chromedriver_path = ChromeDriverManager().install()
 service = Service(executable_path=chromedriver_path)
 # options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36")
