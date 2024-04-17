@@ -11,7 +11,6 @@ import json
 import time
 import csv
 import os
-import chromedriver_autoinstaller
 
 options = webdriver.ChromeOptions()
 chromedriver_path = ChromeDriverManager().install()
