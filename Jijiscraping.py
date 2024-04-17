@@ -30,71 +30,34 @@ options = {
 # driver = webdriver.Chrome(service=service, options=options)
 driver = session.create_driver(webdriver.Chrome,service=service, options=options)
 
-base_url = "https://jiji.ng" 
-time.sleep(5)
-# itemz = []
-# itemtarcount = 10
-# previous_height = driver.execute_script("return document.body.scrollHeight")
-# # to scrap the entire page use:
-# # while True
-# while True:
-#     driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
-#     time.sleep(5)  #
-#     new_height = driver.execute_script("return document.body.scrollHeight")
-#     if new_height == previous_height:
-#         break
-#     previous_height = new_height
-    
-#     textelements = []
-#     wait = WebDriverWait(driver, 10)
-#     elements = wait.until(EC.presence_of_all_elements_located((By.XPATH, "//a[contains(@class, 'b-list-advert-base')]")))
-
-#     for element in elements:
-#         href = element.get_attribute("href")
-#         full_url = href
-#         print(full_url)
-#         jijipg = {'URLS':full_url}
-#         textelements.append(jijipg)
-        
-#     itemz.extend(textelements)
-
-
-# file_name = 'link_lists.csv'
-# file_exists = os.path.isfile(file_name)
-
-# with open(file_name, 'a', newline='', encoding='utf-8') as f:
-#     writer = csv.DictWriter(f, fieldnames=['URLS'])
-
-#     # Write header only if the file is newly created
-#     if not file_exists:
-#         writer.writeheader()
-
-#     writer.writerows(itemz)     
-
-time.sleep(10)
-# Load the saved cookies from the file
-# with open('cookies.json', 'r') as file:
-#     cookies = json.load(file)
-
-# Visit the website
-
-
-
-with open('cookies.json', 'r') as file:
-    cookies = json.load(file)
-    
 driver.get("https://jiji.ng")
-  
-for cookie in cookies:
-    if 'expiry' in cookie:
-        del cookie['expiry']  # Remove expiry dates as they can cause issues
-    driver.add_cookie(cookie)
 
-# # Add the saved cookies to the browser
-# for cookie in cookies:
-#     driver.add_cookie(cookie)
+# Locate the "Sign In" link using the given XPath
+sign_in_link = driver.find_element(By.XPATH, "//a[@href='/login.html' and @class='h-flex-center']")
 
-# Refresh the page to apply the cookies
+# Click on the "Sign In" link
+sign_in_link.click()
+
+# Wait for the presence of the email or phone input field
+wait = WebDriverWait(driver, 30)
+email_phone_input = wait.until(EC.presence_of_element_located((By.XPATH, "//span[contains(text(), 'E-mail or phone')]")))
+
+# Click on the "E-mail or phone" input field
+email_phone_input.click()
+
+# Input the email or phone number
+emailinput = wait.until(EC.presence_of_element_located((By.XPATH, "//input[contains(@class, 'qa-login-field')]")))
+emailinput.send_keys("daposhiyanbola@gmail.com")
+
+# Locate the password input field and input the password
+password_input = wait.until(EC.presence_of_element_located((By.XPATH, "//input[@type='password']")))
+password_input.send_keys("JohnBull!23")
+
+# Locate and click the "Log in" button
+login_button = wait.until(EC.element_to_be_clickable((By.XPATH, "//span[contains(text(), 'SIGN IN')]")))
+login_button.click()
+time.sleep(5)
+
 driver.refresh()
 
 time.sleep(5)
