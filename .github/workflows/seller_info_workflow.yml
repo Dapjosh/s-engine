@@ -25,6 +25,6 @@ jobs:
           python -m webdriver_manager.chrome install   
 
       - name: Run Cookies for login
-        run: python cookies.py
+        run: python Jijiscraping.py
 
      
