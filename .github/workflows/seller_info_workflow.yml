@@ -18,7 +18,7 @@ jobs:
           
       - name: Install dependencies
         run: |
-          pip install selenium webdriver-manager
+          pip install selenium webdriver-manager requests csv
 
       - name: Download ChromeDriver
         run: |
