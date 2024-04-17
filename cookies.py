@@ -1,15 +1,24 @@
 from datetime import datetime, timedelta
 from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
+from webdriver_manager.chrome import ChromeDriverManager
+# from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import time
 import json
 
-options = Options()
-options.headless = True
-driver = webdriver.Chrome(options=options)
+options = webdriver.ChromeOptions()
+chromedriver_path = ChromeDriverManager().install()
+service = Service(executable_path=chromedriver_path)
+options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36")
+options.add_argument("--headless=new")
+options.add_argument("--no-sandbox")
+
+# Initialize the Chrome driver with options
+driver = webdriver.Chrome(service=service, options=options)
+
 
 # Navigate to the Jiji laptop website
 driver.get("https://jiji.ng")
