@@ -11,17 +11,17 @@ import json
 import time
 import csv
 import os
+import chromedriver_autoinstaller
 
 options = webdriver.ChromeOptions()
-
+chromedriver_path = ChromeDriverManager().install()
+service = Service(executable_path=chromedriver_path)
 options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36")
 options.add_argument("--headless=new")
 options.add_argument("--no-sandbox")
 
-chromedriver_autoinstaller.install()
-
 # Initialize the Chrome driver with options
-driver = webdriver.Chrome(options=options)
+driver = webdriver.Chrome(service=service, options=options)
 
 base_url = "https://jiji.ng" 
 time.sleep(5)
