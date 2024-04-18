@@ -14,9 +14,10 @@ import csv
 import os
 
 # options = webdriver.ChromeOptions()
-session = requests.session()
+# session = requests.session()
 chromedriver_path = ChromeDriverManager().install()
 service = Service(executable_path=chromedriver_path)
+base_url = "https://jiji.ng"
 # options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36")
 # options.add_argument("--headless=new")
 # options.add_argument("--no-sandbox")
@@ -27,10 +28,10 @@ options = {
 }
 
 # Initialize the Chrome driver with options
-# driver = webdriver.Chrome(service=service, options=options)
-driver = session.create_driver(webdriver.Chrome,service=service, options=options)
+driver = webdriver.Chrome(service=service, options=options)
+# driver = session.get(webdriver.Chrome,service=service, options=options)
 
-driver.get("https://jiji.ng")
+driver.get(base_url)
 
 # Locate the "Sign In" link using the given XPath
 sign_in_link = driver.find_element(By.XPATH, "//a[@href='/login.html' and @class='h-flex-center']")
@@ -57,6 +58,12 @@ password_input.send_keys("JohnBull!23")
 login_button = wait.until(EC.element_to_be_clickable((By.XPATH, "//span[contains(text(), 'SIGN IN')]")))
 login_button.click()
 time.sleep(5)
+
+driver_cookies = driver.get_cookies()
+
+current_url = driver.current_url
+
+test = requests.get(current_url,cookies=driver_cookies)
 
 driver.refresh()
 
