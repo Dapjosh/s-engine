@@ -13,19 +13,19 @@ import time
 import csv
 import os
 
-# options = webdriver.ChromeOptions()
+options = webdriver.ChromeOptions()
 # session = requests.session()
 chromedriver_path = ChromeDriverManager().install()
 service = Service(executable_path=chromedriver_path)
 base_url = "https://jiji.ng"
-# options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36")
-# options.add_argument("--headless=new")
-# options.add_argument("--no-sandbox")
-options = {
-    "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36",
-    "args": ["--headless=new"],
-    "no-sandbox": True,
-}
+options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36")
+options.add_argument("--headless=new")
+options.add_argument("--no-sandbox")
+# options = {
+#     "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36",
+#     "args": ["--headless=new"],
+#     "no-sandbox": True,
+# }
 
 # Initialize the Chrome driver with options
 driver = webdriver.Chrome(service=service, options=options)
