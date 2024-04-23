@@ -8,7 +8,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException, NoSuchElementException
 import requests
-import pickle
+# import pickle
 import json
 import time
 import csv
@@ -60,18 +60,18 @@ login_button = wait.until(EC.element_to_be_clickable((By.XPATH, "//span[contains
 login_button.click()
 time.sleep(5)
 
-with open('session.pickle', 'wb') as f:
- pickle.dump(driver, f)
+# with open('session.pickle', 'wb') as f:
+# 	pickle.dump(driver, f)
 
-# driver_cookies = driver.get_cookies()
+# # driver_cookies = driver.get_cookies()
 
-# current_url = driver.current_url
+# # current_url = driver.current_url
 
-# test = requests.get(current_url,cookies=driver_cookies)
+# # test = requests.get(current_url,cookies=driver_cookies)
 
-# Load the stored instance in your GitHub Actions workflow
-with open('session.pickle', 'rb') as f:
-	driver = pickle.load(f)
+# # Load the stored instance in your GitHub Actions workflow
+# with open('session.pickle', 'rb') as f:
+# 	driver = pickle.load(f)
 
 driver.refresh()
 
