@@ -8,7 +8,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException, NoSuchElementException
 import requests
-# import pickle
+import pickle
 import json
 import time
 import csv
@@ -20,7 +20,7 @@ chromedriver_path = ChromeDriverManager().install()
 service = Service(executable_path=chromedriver_path)
 base_url = "https://jiji.ng"
 options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36")
-options.add_argument("--headless=new")
+# options.add_argument("--headless=new")
 options.add_argument("--no-sandbox")
 # options = {
 #     "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36",
@@ -60,18 +60,35 @@ login_button = wait.until(EC.element_to_be_clickable((By.XPATH, "//span[contains
 login_button.click()
 time.sleep(5)
 
+
+driver_cookies = driver.get_cookies()
+
+session_data = {
+    "cookies": driver_cookies
+}
+
 # with open('session.pickle', 'wb') as f:
-# 	pickle.dump(driver, f)
+#   pickle.dump(driver, f)
 
-# # driver_cookies = driver.get_cookies()
+  
+with open('session.pickle', 'wb') as outfile:
+    pickle.dump(session_data, outfile)  
+    
+with open('session.pickle', 'rb') as infile:
+    session_data = pickle.load(infile)    
 
-# # current_url = driver.current_url
+# driver_cookies = driver.get_cookies()
 
-# # test = requests.get(current_url,cookies=driver_cookies)
+# current_url = driver.current_url
 
-# # Load the stored instance in your GitHub Actions workflow
+# test = requests.get(current_url,cookies=driver_cookies)
+
+# Load the stored instance in your GitHub Actions workflow
+
 # with open('session.pickle', 'rb') as f:
 # 	driver = pickle.load(f)
+ 
+ 
 
 driver.refresh()
 
