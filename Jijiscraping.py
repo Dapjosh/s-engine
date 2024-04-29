@@ -77,6 +77,8 @@ os.environ['SESSION_COOKIES'] = SESSION_COOKIES_JSON
 session_cookies_json = os.environ.get('SESSION_COOKIES')
 session_cookies = json.loads(session_cookies_json)
 
+print(session_cookies)
+
 headers= {}
 
 test = requests.get(base_url, headers=headers, cookies=session_cookies)
