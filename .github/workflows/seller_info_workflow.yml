@@ -6,9 +6,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
+    
     environment: AUTH_DETAILS
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -32,8 +31,8 @@ jobs:
       - name: Scraping Script
         run: |
           python Jijiscraping.py 
-      # Access cookies from the environment variable
-      secrets:
-        AUTH_USERNAME: ${{ secrets.USERNAME }}
-        AUTH_PASSWORD: ${{ secrets.PASSWORD }}
-        COOKIES: ${{ secrets.SESSION_COOKIES }}
+        # Access cookies from the environment variable
+        env :
+          AUTH_USERNAME: ${{ secrets.USERNAME }}
+          AUTH_PASSWORD: ${{ secrets.PASSWORD }}
+          COOKIES: ${{ secrets.SESSION_COOKIES }}
