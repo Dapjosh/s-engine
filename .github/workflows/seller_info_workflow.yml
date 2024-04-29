@@ -26,10 +26,13 @@ jobs:
 
       - name: Run Cookies for login
         run: | 
-          python Jijiscraping.py
-          import json
-          SESSION_COOKIES_JSON = json.dumps(driver_cookies) 
+          python cookies.py
+      - name: Scraping Script
+        run: |
+          python Jijiscraping.py 
+          # Access cookies from the environment variable
         env:
-          SESSION_COOKIES: ${{ SESSION_COOKIES_JSON }}
+          COOKIES: ${{ secrets.SESSION_COOKIES }}
+
 
      
