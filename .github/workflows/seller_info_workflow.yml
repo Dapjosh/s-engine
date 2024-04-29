@@ -24,17 +24,11 @@ jobs:
       - name: Download ChromeDriver
         run: |
           python -m webdriver_manager.chrome install   
-
-      - name: Run Cookies for login
-        run: | 
-          python cookies.py
-        env :
-          USERNAME: ${{ secrets.USERNAME }}
-          PASSWORD: ${{ secrets.PASSWORD }}
-        
       - name: Scraping Script
         run: |
           python Jijiscraping.py 
         # Access cookies from the environment variable
         env :
+          USERNAME: ${{ secrets.USERNAME }}
+          PASSWORD: ${{ secrets.PASSWORD }}
           COOKIES: ${{ secrets.SESSION_COOKIES }}
