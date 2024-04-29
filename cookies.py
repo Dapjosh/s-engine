@@ -48,8 +48,8 @@ email_phone_input.click()
 # Input the email or phone number
 emailinput = wait.until(EC.presence_of_element_located((By.XPATH, "//input[contains(@class, 'qa-login-field')]")))
 
-username = os.environ.get("USERNAME")
-password = os.environ.get("PASSWORD")
+username = os.environ.get("AUTH_USERNAME")
+password = os.environ.get("AUTH_PASSWORD")
 emailinput.send_keys(username)
 
 # Locate the password input field and input the password
