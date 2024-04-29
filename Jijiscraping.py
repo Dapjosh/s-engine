@@ -73,6 +73,7 @@ SESSION_COOKIES_JSON = json.dumps(driver_cookies)
 
 os.environ['SESSION_COOKIES'] = SESSION_COOKIES_JSON
 
+driver.get(base_url)
  
 session_cookies_json = os.environ.get('SESSION_COOKIES')
 session_cookies = json.loads(session_cookies_json)  
