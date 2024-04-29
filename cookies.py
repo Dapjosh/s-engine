@@ -47,11 +47,14 @@ email_phone_input.click()
 
 # Input the email or phone number
 emailinput = wait.until(EC.presence_of_element_located((By.XPATH, "//input[contains(@class, 'qa-login-field')]")))
-emailinput.send_keys("daposhiyanbola@gmail.com")
+
+username = os.environ.get("USERNAME")
+password = os.environ.get("PASSWORD")
+emailinput.send_keys(username)
 
 # Locate the password input field and input the password
 password_input = wait.until(EC.presence_of_element_located((By.XPATH, "//input[@type='password']")))
-password_input.send_keys("JohnBull!23")
+password_input.send_keys(password)
 
 # Locate and click the "Log in" button
 login_button = wait.until(EC.element_to_be_clickable((By.XPATH, "//span[contains(text(), 'SIGN IN')]")))
