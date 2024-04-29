@@ -33,6 +33,6 @@ jobs:
           python Jijiscraping.py 
         # Access cookies from the environment variable
         env :
-          AUTH_USERNAME: ${{ secrets.USERNAME }}
-          AUTH_PASSWORD: ${{ secrets.PASSWORD }}
+          USERNAME: ${{ secrets.USERNAME }}
+          PASSWORD: ${{ secrets.PASSWORD }}
           COOKIES: ${{ secrets.SESSION_COOKIES }}
