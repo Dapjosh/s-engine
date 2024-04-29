@@ -32,9 +32,8 @@ jobs:
       - name: Scraping Script
         run: |
           python Jijiscraping.py 
-          # Access cookies from the environment variable
-        env:
-          COOKIES: ${{ secrets.SESSION_COOKIES }}
-
-
-     
+      # Access cookies from the environment variable
+      secrets:
+        AUTH_USERNAME: ${{ secrets.USERNAME }}
+        AUTH_PASSWORD: ${{ secrets.PASSWORD }}
+        COOKIES: ${{ secrets.SESSION_COOKIES }}
