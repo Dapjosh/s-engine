@@ -60,7 +60,6 @@ password_input.send_keys(password)
 # Locate and click the "Log in" button
 login_button = wait.until(EC.element_to_be_clickable((By.XPATH, "//span[contains(text(), 'SIGN IN')]")))
 login_button.click()
-time.sleep(5)
 
 driver_cookies = driver.get_cookies()
 
@@ -82,19 +81,14 @@ for cookie in session_cookies:
     #     del cookie['expiry']  # Remove expiry dates as they can cause issues
     driver.add_cookie(cookie)
 
-print(session_cookies)
 
 # Refresh the page to apply the cookies
 driver.refresh()
-
-time.sleep(5)
 
 existing_seller_names = set()
 existing_phone_numbers = set()
 
 seller_info_list = []
-
-count = 1
  
 with open('link_lists.csv', 'r') as csvfile:
     reader = csv.reader(csvfile)
