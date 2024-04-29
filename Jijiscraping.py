@@ -63,19 +63,19 @@ time.sleep(5)
 
 driver_cookies = driver.get_cookies()
 
-session_data = {
-    "cookies": driver_cookies
-}
+# session_data = {
+#     "cookies": driver_cookies
+# }
 
-# with open('session.pickle', 'wb') as f:
-#   pickle.dump(driver, f)
+# # with open('session.pickle', 'wb') as f:
+# #   pickle.dump(driver, f)
 
   
-with open('session.pickle', 'wb') as outfile:
-    pickle.dump(session_data, outfile)  
+# with open('session.pickle', 'wb') as outfile:
+#     pickle.dump(session_data, outfile)  
     
-with open('session.pickle', 'rb') as infile:
-    session_data = pickle.load(infile)    
+# with open('session.pickle', 'rb') as infile:
+#     session_data = pickle.load(infile)    
 
 # driver_cookies = driver.get_cookies()
 
@@ -88,7 +88,12 @@ with open('session.pickle', 'rb') as infile:
 # with open('session.pickle', 'rb') as f:
 # 	driver = pickle.load(f)
  
- 
+session_cookies_json = os.environ.get('SESSION_COOKIES')
+session_cookies = json.loads(session_cookies_json)
+
+headers= {}
+
+test = requests.get(base_url, headers=headers, cookies=session_cookies)
 
 driver.refresh()
 
