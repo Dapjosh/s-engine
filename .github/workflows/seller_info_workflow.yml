@@ -27,7 +27,9 @@ jobs:
       - name: Run Cookies for login
         run: | 
           python Jijiscraping.py
+          import json
+          SESSION_COOKIES_JSON = json.dumps(driver_cookies) 
         env:
-          SESSION_COOKIES: ${{ to_json(driver_cookies) }}
+          SESSION_COOKIES: ${{ SESSION_COOKIES_JSON }}
 
      
