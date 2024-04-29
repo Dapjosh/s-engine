@@ -75,14 +75,13 @@ os.environ['SESSION_COOKIES'] = SESSION_COOKIES_JSON
 
  
 session_cookies_json = os.environ.get('SESSION_COOKIES')
-session_cookies = json.loads(session_cookies_json)
+session_cookies = json.loads(session_cookies_json)  
+for cookie in session_cookies:
+    if 'expiry' in cookie:
+        del cookie['expiry']  # Remove expiry dates as they can cause issues
+    driver.add_cookie(cookie)
 
-print(session_cookies)
-
-headers= {}
-
-test = requests.get(base_url, headers=headers, cookies=session_cookies)
-
+# Refresh the page to apply the cookies
 driver.refresh()
 
 time.sleep(5)
