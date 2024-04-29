@@ -63,7 +63,7 @@ driver_cookies = driver.get_cookies()
 
 expiration_time = int((datetime.now() + timedelta(days=30)).timestamp()) 
 
-for cookie in cookies:
+for cookie in driver_cookies:
     cookie['expiry'] = expiration_time
     
 SESSION_COOKIES_JSON = json.dumps(session_cookies)
