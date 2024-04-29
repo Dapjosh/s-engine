@@ -81,9 +81,21 @@ for cookie in session_cookies:
     #     del cookie['expiry']  # Remove expiry dates as they can cause issues
     driver.add_cookie(cookie)
 
+driver_cookies = driver.get_cookies()
+print("Cookies after adding:")
+print(driver_cookies)
 
 # Refresh the page to apply the cookies
 driver.refresh()
+
+# Print out the driver's cookies after refreshing the page to ensure they are applied correctly
+driver_cookies_after_refresh = driver.get_cookies()
+print("Cookies after refresh:")
+print(driver_cookies_after_refresh)
+
+
+# Refresh the page to apply the cookies
+# driver.refresh()
 
 existing_seller_names = set()
 existing_phone_numbers = set()
