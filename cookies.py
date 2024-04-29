@@ -11,25 +11,26 @@ import time
 import json
 
 # options = webdriver.ChromeOptions()
-session = Session()
+
+options = webdriver.ChromeOptions()
+# session = requests.session()
 chromedriver_path = ChromeDriverManager().install()
 service = Service(executable_path=chromedriver_path)
-# options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36")
-# options.add_argument("--headless=new")
-# options.add_argument("--no-sandbox")
-
-options = {
-    "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36",
-    "args": ["--headless=new"],
-    "no-sandbox": True,
-}
+base_url = "https://jiji.ng"
+options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36")
+options.add_argument("--headless=new")
+options.add_argument("--no-sandbox")
+# options = {
+#     "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36",
+#     "args": ["--headless=new"],
+#     "no-sandbox": True,
+# }
 
 # Initialize the Chrome driver with options
-driver = session.create_driver(webdriver.Chrome,service=service, options=options)
+driver = webdriver.Chrome(service=service, options=options)
+# driver = session.get(webdriver.Chrome,service=service, options=options)
 
-
-# Navigate to the Jiji laptop website
-driver.get("https://jiji.ng")
+driver.get(base_url)
 
 # Locate the "Sign In" link using the given XPath
 sign_in_link = driver.find_element(By.XPATH, "//a[@href='/login.html' and @class='h-flex-center']")
@@ -56,15 +57,17 @@ password_input.send_keys("JohnBull!23")
 login_button = wait.until(EC.element_to_be_clickable((By.XPATH, "//span[contains(text(), 'SIGN IN')]")))
 login_button.click()
 time.sleep(5)
-# Save the cookies to a file
-cookies = driver.get_cookies()
+
+
+driver_cookies = driver.get_cookies()
 
 expiration_time = int((datetime.now() + timedelta(days=30)).timestamp()) 
 
 for cookie in cookies:
     cookie['expiry'] = expiration_time
     
-with open('cookies.json', 'w') as file:
-    json.dump(cookies, file)
+SESSION_COOKIES_JSON = json.dumps(session_cookies)
+
+os.environ['SESSION_COOKIES'] = SESSION_COOKIES_JSON
 
 driver.quit()
