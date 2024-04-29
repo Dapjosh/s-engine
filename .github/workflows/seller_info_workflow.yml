@@ -25,8 +25,8 @@ jobs:
           python -m webdriver_manager.chrome install   
 
       - name: Run Cookies for login
-        run: python Jijiscraping.py
-
+        run: | 
+          python Jijiscraping.py
         env:
           SESSION_COOKIES: ${{ to_json(driver_cookies) }}
 
