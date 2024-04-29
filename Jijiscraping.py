@@ -82,6 +82,8 @@ for cookie in session_cookies:
         del cookie['expiry']  # Remove expiry dates as they can cause issues
     driver.add_cookie(cookie)
 
+print(cookie)
+
 # Refresh the page to apply the cookies
 driver.refresh()
 
