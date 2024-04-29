@@ -33,30 +33,45 @@ driver = webdriver.Chrome(service=service, options=options)
 
 driver.get(base_url)
 
-# session_data = {
-#     "cookies": driver_cookies
-# }
+sign_in_link = driver.find_element(By.XPATH, "//a[@href='/login.html' and @class='h-flex-center']")
 
-# # with open('session.pickle', 'wb') as f:
-# #   pickle.dump(driver, f)
+# Click on the "Sign In" link
+sign_in_link.click()
 
-  
-# with open('session.pickle', 'wb') as outfile:
-#     pickle.dump(session_data, outfile)  
+# Wait for the presence of the email or phone input field
+wait = WebDriverWait(driver, 30)
+email_phone_input = wait.until(EC.presence_of_element_located((By.XPATH, "//span[contains(text(), 'E-mail or phone')]")))
+
+# Click on the "E-mail or phone" input field
+email_phone_input.click()
+
+# Input the email or phone number
+emailinput = wait.until(EC.presence_of_element_located((By.XPATH, "//input[contains(@class, 'qa-login-field')]")))
+
+username = os.environ.get("USERNAME")
+password = os.environ.get("PASSWORD")
+emailinput.send_keys(username)
+
+# Locate the password input field and input the password
+password_input = wait.until(EC.presence_of_element_located((By.XPATH, "//input[@type='password']")))
+password_input.send_keys(password)
+
+# Locate and click the "Log in" button
+login_button = wait.until(EC.element_to_be_clickable((By.XPATH, "//span[contains(text(), 'SIGN IN')]")))
+login_button.click()
+time.sleep(5)
+
+driver_cookies = driver.get_cookies()
+
+expiration_time = int((datetime.now() + timedelta(days=30)).timestamp()) 
+
+for cookie in driver_cookies:
+    cookie['expiry'] = expiration_time
     
-# with open('session.pickle', 'rb') as infile:
-#     session_data = pickle.load(infile)    
+SESSION_COOKIES_JSON = json.dumps(driver_cookies)
 
-# driver_cookies = driver.get_cookies()
+os.environ['SESSION_COOKIES'] = SESSION_COOKIES_JSON
 
-# current_url = driver.current_url
-
-# test = requests.get(current_url,cookies=driver_cookies)
-
-# Load the stored instance in your GitHub Actions workflow
-
-# with open('session.pickle', 'rb') as f:
-# 	driver = pickle.load(f)
  
 session_cookies_json = os.environ.get('SESSION_COOKIES')
 session_cookies = json.loads(session_cookies_json)
