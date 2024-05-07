@@ -63,16 +63,13 @@ login_button.click()
 
 driver_cookies = driver.get_cookies()
 
-expiration_time = int((datetime.now() + timedelta(days=30)).timestamp()) 
-
-for cookie in driver_cookies:
-    cookie['expiry'] = expiration_time
+# expiration_time = int((datetime.now() + timedelta(days=30)).timestamp()) 
     
 SESSION_COOKIES_JSON = json.dumps(driver_cookies)
 
 os.environ['SESSION_COOKIES'] = SESSION_COOKIES_JSON
 
-driver.get(base_url)
+# driver.get(base_url)
  
 session_cookies_json = os.environ.get('SESSION_COOKIES')
 session_cookies = json.loads(session_cookies_json)  
