@@ -97,7 +97,7 @@ with open('link_lists.csv', 'r') as csvfile:
     for row in reader:
         seller_url = row[0]
         driver.get(seller_url)
-        time.sleep(5) 
+        # time.sleep(5) 
 
         WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, "//body")))
         
