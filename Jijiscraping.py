@@ -81,10 +81,11 @@ for cookie in session_cookies:
         del cookie['expiry']  # Remove expiry dates as they can cause issues
     driver.add_cookie(cookie)
 
+time.sleep(5)
 # Refresh the page to apply the cookies
 driver.refresh()
 
-time.sleep(5)
+
 
 existing_seller_names = set()
 existing_phone_numbers = set()
@@ -97,7 +98,7 @@ with open('link_lists.csv', 'r') as csvfile:
     for row in reader:
         seller_url = row[0]
         driver.get(seller_url)
-        # time.sleep(5) 
+        time.sleep(5) 
 
         WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, "//body")))
         
