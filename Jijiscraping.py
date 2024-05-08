@@ -130,7 +130,8 @@ existing_seller_names = set()
 existing_phone_numbers = set()
 
 seller_info_list = []
- 
+
+count = 1
 with open('link_lists.csv', 'r') as csvfile:
     reader = csv.reader(csvfile)
     next(reader)  # Skip the header row if it exists
