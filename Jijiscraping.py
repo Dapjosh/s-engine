@@ -51,6 +51,13 @@ emailinput = wait.until(EC.presence_of_element_located((By.XPATH, "//input[conta
 
 username = os.environ.get("USERNAME")
 password = os.environ.get("PASSWORD")
+
+session_cookies_json = os.environ.get('SESSION_COOKIES')
+if session_cookies_json:
+    session_cookies = json.loads(session_cookies_json)
+    for cookie in session_cookies:
+        driver.add_cookie(cookie)
+
 emailinput.send_keys(username)
 
 # Locate the password input field and input the password
@@ -59,24 +66,34 @@ password_input.send_keys(password)
 
 # Locate and click the "Log in" button
 login_button = wait.until(EC.element_to_be_clickable((By.XPATH, "//span[contains(text(), 'SIGN IN')]")))
-login_button.click()
+login_button.click
 
-driver_cookies = driver.get_cookies()
+try:
+    # Wait for the user dropdown menu to appear, indicating successful login
+    wait.until(EC.presence_of_element_located((By.XPATH, "//div[@class='qa-profile-header-link']")))
+    print("Login successful")
+except TimeoutException:
+    print("Login failed")
+    driver.quit()
+    exit(1)
+
+session_cookies = driver.get_cookies()
+os.environ['SESSION_COOKIES'] = json.dumps(session_cookies)
 
 # expiration_time = int((datetime.now() + timedelta(days=30)).timestamp()) 
     
-SESSION_COOKIES_JSON = json.dumps(driver_cookies)
+# SESSION_COOKIES_JSON = json.dumps(driver_cookies)
 
-os.environ['SESSION_COOKIES'] = SESSION_COOKIES_JSON
+# os.environ['SESSION_COOKIES'] = SESSION_COOKIES_JSON
 
 # driver.get(base_url)
  
-session_cookies_json = os.environ.get('SESSION_COOKIES')
-session_cookies = json.loads(session_cookies_json)  
-for cookie in session_cookies:
-    if 'expiry' in cookie:
-        del cookie['expiry']  # Remove expiry dates as they can cause issues
-    driver.add_cookie(cookie)
+# session_cookies_json = os.environ.get('SESSION_COOKIES')
+# session_cookies = json.loads(session_cookies_json)  
+# for cookie in session_cookies:
+#     if 'expiry' in cookie:
+#         del cookie['expiry']  # Remove expiry dates as they can cause issues
+#     driver.add_cookie(cookie)
 
 time.sleep(5)
 # Refresh the page to apply the cookies
