@@ -70,12 +70,29 @@ login_button.click()
 
 time.sleep(5)
 
-session_cookies = driver.get_cookies()
-os.environ['SESSION_COOKIES'] = json.dumps(session_cookies)
 
-time.sleep(5)
+session_cookies = driver.get_cookies()
+
+for cookie in session_cookies:
+    if 'expiry' in cookie:
+        del cookie['expiry']  
+    # Remove expiry dates as they can cause issues
+    driver.add_cookie(cookie)
+
 # Refresh the page to apply the cookies
 driver.refresh()
+
+# session_cookies_json = os.environ.get('SESSION_COOKIES')
+# session_cookies = json.loads(session_cookies_json)  
+# for cookie in session_cookies:
+#     if 'expiry' in cookie:
+#         del cookie['expiry']  # Remove expiry dates as they can cause issues
+#     driver.add_cookie(cookie)
+
+# Refresh the page to apply the cookies
+driver.get("https://jiji.ng")
+
+time.sleep(5)
 
 try:
     # Wait for the user dropdown menu to appear, indicating successful login
@@ -102,10 +119,6 @@ except TimeoutException:
 #     if 'expiry' in cookie:
 #         del cookie['expiry']  # Remove expiry dates as they can cause issues
 #     driver.add_cookie(cookie)
-
-
-
-
 
 existing_seller_names = set()
 existing_phone_numbers = set()
