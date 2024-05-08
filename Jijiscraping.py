@@ -67,7 +67,10 @@ password_input.send_keys(password)
 # Locate and click the "Log in" button
 login_button = wait.until(EC.element_to_be_clickable((By.XPATH, "//span[contains(text(), 'SIGN IN')]")))
 login_button.click
-print(session_cookies_json)
+
+time.sleep(5)
+
+
 try:
     # Wait for the user dropdown menu to appear, indicating successful login
     wait.until(EC.presence_of_element_located((By.XPATH, "//div[contains(@class, 'qa-profile-header-link')]")))
