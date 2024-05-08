@@ -70,7 +70,7 @@ login_button.click
 print(session_cookies_json)
 try:
     # Wait for the user dropdown menu to appear, indicating successful login
-    wait.until(EC.presence_of_element_located((By.XPATH, "//div[@class='qa-profile-header-link']")))
+    wait.until(EC.presence_of_element_located((By.XPATH, "//div[contains(@class, 'qa-profile-header-link')]")))
     print("Login successful")
 except TimeoutException:
     print("Login failed")
