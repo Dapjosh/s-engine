@@ -66,22 +66,27 @@ password_input.send_keys(password)
 
 # Locate and click the "Log in" button
 login_button = wait.until(EC.element_to_be_clickable((By.XPATH, "//span[contains(text(), 'SIGN IN')]")))
-login_button.click
+login_button.click()
 
 time.sleep(5)
 
+session_cookies = driver.get_cookies()
+os.environ['SESSION_COOKIES'] = json.dumps(session_cookies)
+
+time.sleep(5)
+# Refresh the page to apply the cookies
+driver.refresh()
 
 try:
     # Wait for the user dropdown menu to appear, indicating successful login
-    wait.until(EC.presence_of_element_located((By.XPATH, "//div[contains(@class, 'qa-profile-header-link')]")))
+    wait.until(EC.presence_of_element_located((By.XPATH, "//a[contains(@class, 'qa-profile-header-link')]")))
     print("Login successful")
 except TimeoutException:
     print("Login failed")
     driver.quit()
     exit(1)
 
-session_cookies = driver.get_cookies()
-os.environ['SESSION_COOKIES'] = json.dumps(session_cookies)
+
 
 # expiration_time = int((datetime.now() + timedelta(days=30)).timestamp()) 
     
@@ -98,9 +103,7 @@ os.environ['SESSION_COOKIES'] = json.dumps(session_cookies)
 #         del cookie['expiry']  # Remove expiry dates as they can cause issues
 #     driver.add_cookie(cookie)
 
-time.sleep(5)
-# Refresh the page to apply the cookies
-driver.refresh()
+
 
 
 
