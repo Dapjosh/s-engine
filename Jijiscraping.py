@@ -23,6 +23,12 @@ base_url = "https://jiji.ng"
 options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36")
 options.add_argument("--headless=new")
 options.add_argument("--no-sandbox")
+options.add_argument("--disable-dev-shm-usage")
+options.add_argument("--disable-gpu")
+options.add_argument("--disable-extensions")
+
+# Adjust window size if needed
+options.add_argument("--window-size=1920,1080")
 # options = {
 #     "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36",
 #     "args": ["--headless=new"],
