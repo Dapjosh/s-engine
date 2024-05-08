@@ -19,11 +19,17 @@ jobs:
           
       - name: Install dependencies
         run: |
+          sudo apt-get update
+          sudo apt-get install -y xvfb chromium-browser
           pip install selenium webdriver-manager requests selenium-requests
-
+          
       - name: Download ChromeDriver
         run: |
-          python -m webdriver_manager.chrome install   
+          python -m webdriver_manager.chrome install  
+          
+      - name: Start Xvfb
+        run: Xvfb :99 -screen 0 1920x1080x24 -ac +extension GLX +render -noreset &   
+  
       - name: Scraping Script
         run: |
           python Jijiscraping.py
@@ -37,3 +43,4 @@ jobs:
           USERNAME: ${{ secrets.USERNAME }}
           PASSWORD: ${{ secrets.PASSWORD }}
           COOKIES: ${{ secrets.SESSION_COOKIES }}
+          DISPLAY: :99
